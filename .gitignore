@@ -1,0 +1,10 @@
+build/app
+build/vendor
+build/templates
+build/test
+typings
+node_modules
+*.log
+.idea
+*.iml
+

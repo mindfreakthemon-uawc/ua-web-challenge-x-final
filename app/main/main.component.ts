@@ -6,5 +6,5 @@ import { Component } from '@angular/core';
 	templateUrl: 'tmpl/main.html'
 })
 export class MainComponent {
-
+	audioContext = new AudioContext();
 }

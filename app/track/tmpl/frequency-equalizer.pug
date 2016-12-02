@@ -1,0 +1,7 @@
+ul.list-unstyled('*ngIf'='filters')
+	li('*ngFor'='let filter of filters')
+		.container
+			.col-xs-4 {{filter.frequency.value}} Hz
+			.col-xs-6
+				input('[(ngModel)]'='filter.gain.value', type='range', name='"filter" + filter.frequency.value', min=-100, max=100)
+			.col-xs-2 {{filter.gain.value}}

@@ -1,0 +1,30 @@
+.container.card('*ngIf'='gainNode')
+	h2 Master Volume
+
+	volume-visualizer(
+		'*ngIf'='gainNode',
+		'[source]'='gainNode',
+		'[volume]'='gainNode.gain.value',
+		'[audioContext]'='audioContext'
+	)
+
+	input(
+		'[ngModel]'='gainNode.gain.value',
+		'(ngModelChange)'='setVolume($event)',
+		name='volume',
+		type='range',
+		min=0,
+		max=1,
+		step=0.01
+	)
+
+	h2 Central fade
+	input(
+		'[ngModel]'='centralFade',
+		'(ngModelChange)'='setCentralFade($event)',
+		name='centralFade',
+		type='range',
+		min=-50,
+		max=50,
+		step=0.1
+	)

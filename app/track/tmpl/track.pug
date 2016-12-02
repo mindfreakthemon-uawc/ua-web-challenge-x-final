@@ -1,0 +1,97 @@
+.container.card
+	.row
+		.col-xs-12.p-a-1
+			h4 Track Uploader
+			uploader(
+				'[files]'='files'
+			)
+
+	.row
+		.col-xs-12.p-a-1
+			h4 Track List
+			audio-list(
+				'[files]'='files',
+				'[active]'='audio',
+				'(selectBeacon)'='setTrack($event)'
+			)
+
+	form.row('*ngIf'='gainNode', '[hidden]'='!audio')
+		.col-xs-12.p-a-1
+
+			h4 Track Controls
+			.container
+				.col-xs-12
+					frequency-visualizer(
+						'[source]'='gainNode',
+						'[audioContext]'='audioContext'
+					)
+
+					volume-visualizer(
+						'[source]'='gainNode',
+						'[volume]'='gainNode.gain.value',
+						'[audioContext]'='audioContext'
+					)
+
+			fieldset
+				h6 Volume
+				.container
+					.col-xs-9
+						input(
+							'[ngModel]'='gainNode.gain.value',
+							'(ngModelChange)'='setVolume($event)',
+							name='volume',
+							type='range',
+							min=0,
+							max=1,
+							step=0.01
+						)
+					.col-xs-3 {{volume}}%
+
+
+
+				h6 Tempo
+				.container
+					.col-xs-9
+						input(
+							'[ngModel]'='playbackRate',
+							'(ngModelChange)'='setTempo($event)',
+							name='tempo',
+							type='range',
+							min=0.5,
+							max=2,
+							step=0.25
+						)
+					.col-xs-3 {{playbackRate}}x
+
+				h6('*ngIf'='audio') Position
+				.container('*ngIf'='audio')
+					.col-xs-9
+
+						input(
+							'[ngModel]'='position',
+							'(ngModelChange)'='setPosition($event)',
+							name='position',
+							type='range',
+							min=0,
+							'[max]'='audio.duration',
+							value=0
+						)
+					.col-xs-3 {{status}}
+
+				h6 Equalizer
+				frequency-equalizer(
+					'[audioContext]'='audioContext'
+				)
+
+				.container.m-a-0.p-a-0('*ngIf'='audio')
+					.col-xs-6
+						.btn-group
+							button.btn(type='button', '(click)'='togglePlayPause()', '[ngSwitch]'='audio.paused')
+								span('*ngSwitchCase'='true') Play
+								span('*ngSwitchCase'='false') Pause
+							button.btn(type='button', '(click)'='rewind()') Rewind
+
+					.col-xs-6.text-xs-right
+						.btn-group
+							button.btn(type='button', '(click)'='previous()') Previous
+							button.btn(type='button', '(click)'='next()') Next

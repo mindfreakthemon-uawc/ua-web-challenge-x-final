@@ -1,0 +1,12 @@
+.uploader-error('[ngSwitch]'='error')
+	.alert.alert-gander('*ngSwitchCase'='"network"') Sorry, there was an error while loading this file.
+
+.alert.alert-info('*ngIf'='loading') loading...
+
+button.btn.btn-sm('*ngIf'='!shown', '(click)'='shown = true') Show
+button.btn.btn-sm('*ngIf'='shown', '(click)'='shown = false') Hide
+
+form('[hidden]'='loading || !shown')
+	.form-group
+		label from your computer:
+		input.form-control(type='file', '(change)'='handleFileSelect($event)', accept='.mp3,.wav')

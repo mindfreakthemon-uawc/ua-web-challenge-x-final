@@ -1,0 +1,12 @@
+button.btn.btn-sm('*ngIf'='!shown', '(click)'='shown = true') Show
+button.btn.btn-sm('*ngIf'='shown', '(click)'='shown = false') Hide
+
+.alert.alert-info.m-y-1('*ngIf'='!files.length && shown') please, upload a track
+
+ul.list-unstyled('[hidden]'='!shown')
+	li.p-a-1('*ngFor'='let file of files')
+		.title {{file.dataset.name}}
+			| &nbsp;
+			span.tag.tag-primary('*ngIf'='file === active') selected
+		button.btn.btn-primary.btn-sm(type='button', '(click)'='selectBeacon.emit(file)') select
+

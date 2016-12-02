@@ -1,2 +1,22 @@
-.row.text-xs-center.text-md-right
-	h2 eh
+.row
+	.col-md-5
+		track(
+			'#trackOne'='',
+			'[audioContext]'='audioContext'
+		)
+
+	.col-md-2
+		main-control(
+			'[trackOne]'='trackOne',
+			'[trackTwo]'='trackTwo',
+			'[audioContext]'='audioContext'
+		)
+
+	.col-md-5
+		track(
+			'#trackTwo'='',
+			'[audioContext]'='audioContext'
+		)
+
+
+
